@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Image Compare</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <main class="container">
+      <header class="page-header">
+        <h1>Image Compare</h1>
+        <p>Upload two images to compare their stats and slide between them visually.</p>
+      </header>
+
+      <section class="card" aria-labelledby="upload-title">
+        <div class="card-header">
+          <h2 id="upload-title">Your images</h2>
+          <div class="actions">
+            <button type="button" class="btn" id="swap-btn" disabled>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h13m0 0-4-4m4 4-4 4M17 17H4m0 0 4 4m-4-4 4-4" /></svg>
+              Swap
+            </button>
+            <button type="button" class="btn btn-ghost" id="clear-btn" disabled>Clear all</button>
+          </div>
+        </div>
+
+        <form class="upload-grid" onsubmit="return false">
+          <label class="dropzone" data-slot="a">
+            <input type="file" accept="image/*" class="visually-hidden" aria-label="Choose first image" />
+            <span class="badge badge-a">A</span>
+            <div class="dropzone-empty">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 16V4m0 0-4 4m4-4 4 4M4 16v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" /></svg>
+              <strong>First image</strong>
+              <span>Drop here or click to browse</span>
+            </div>
+            <img class="dropzone-preview" alt="Preview of first image" />
+            <div class="dropzone-footer">
+              <div class="dropzone-info">
+                <span class="dropzone-name"></span>
+                <span class="dropzone-meta"></span>
+              </div>
+              <button type="button" class="btn btn-small btn-ghost remove-btn">Remove</button>
+            </div>
+          </label>
+
+          <label class="dropzone" data-slot="b">
+            <input type="file" accept="image/*" class="visually-hidden" aria-label="Choose second image" />
+            <span class="badge badge-b">B</span>
+            <div class="dropzone-empty">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 16V4m0 0-4 4m4-4 4 4M4 16v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" /></svg>
+              <strong>Second image</strong>
+              <span>Drop here or click to browse</span>
+            </div>
+            <img class="dropzone-preview" alt="Preview of second image" />
+            <div class="dropzone-footer">
+              <div class="dropzone-info">
+                <span class="dropzone-name"></span>
+                <span class="dropzone-meta"></span>
+              </div>
+              <button type="button" class="btn btn-small btn-ghost remove-btn">Remove</button>
+            </div>
+          </label>
+        </form>
+
+        <p class="error" id="error" role="alert" hidden></p>
+        <p class="hint" id="hint">Add both images to see the comparison. Tip: drop two files at once to fill both slots.</p>
+      </section>
+
+      <section id="results" class="results" hidden>
+        <div class="card">
+          <div class="card-header">
+            <h2>Visual comparison</h2>
+            <span class="muted">Drag the divider, or focus it and use the arrow keys</span>
+          </div>
+
+          <div class="compare" id="compare">
+            <img class="compare-img" id="compare-b" alt="Second image" draggable="false" />
+            <img class="compare-img compare-top" id="compare-a" alt="First image" draggable="false" />
+            <span class="compare-label compare-label-left" id="label-a"></span>
+            <span class="compare-label compare-label-right" id="label-b"></span>
+            <div
+              class="compare-handle"
+              id="compare-handle"
+              role="slider"
+              tabindex="0"
+              aria-label="Comparison divider position"
+              aria-valuemin="0"
+              aria-valuemax="100"
+              aria-valuenow="50"
+            >
+              <span class="compare-knob">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 6-6 6 6 6M15 6l6 6-6 6" /></svg>
+              </span>
+            </div>
+          </div>
+          <p class="muted size-note" id="size-note" hidden>
+            The images have different dimensions, so both are scaled to fit the same frame.
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h2>Stats</h2>
+            <span class="muted">Differences are shown for B relative to A</span>
+          </div>
+          <div class="table-wrap">
+            <table class="stats">
+              <thead>
+                <tr>
+                  <th scope="col">Property</th>
+                  <th scope="col"><span class="badge badge-a">A</span></th>
+                  <th scope="col"><span class="badge badge-b">B</span></th>
+                  <th scope="col">Difference</th>
+                </tr>
+              </thead>
+              <tbody id="stats-body"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <footer class="page-footer">Images stay in your browser (IndexedDB) and are never uploaded.</footer>
+    </main>
+  </body>
+</html>
