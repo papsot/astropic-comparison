@@ -185,6 +185,12 @@ svg {
   outline-offset: 2px;
 }
 
+.btn.is-active {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
 /* Badges */
 .badge {
   display: inline-grid;
@@ -526,6 +532,45 @@ svg {
 .pill-warn {
   color: var(--warn);
   background: color-mix(in srgb, var(--warn) 14%, transparent);
+}
+
+/* Fullscreen mode */
+#compare-card:fullscreen {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  max-width: none;
+  border-radius: 0;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
+
+#compare-card:fullscreen .card-header {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+  flex-wrap: nowrap;
+  margin-bottom: 0;
+}
+
+#compare-card:fullscreen .card-header h2 {
+  flex: 1;
+}
+
+#compare-card:fullscreen .muted {
+  display: none;
+}
+
+#compare-card:fullscreen .compare {
+  flex: 1;
+  max-height: none;
+  border-radius: 0;
+  margin: 0;
 }
 
 @media (max-width: 600px) {

@@ -69,10 +69,15 @@
       </section>
 
       <section id="results" class="results" hidden>
-        <div class="card">
+        <div class="card" id="compare-card">
           <div class="card-header">
             <h2>Visual comparison</h2>
-            <span class="muted">Drag the divider, or focus it and use the arrow keys</span>
+            <div class="actions">
+              <span class="muted">Drag the divider, or focus it and use the arrow keys</span>
+              <button type="button" class="btn btn-small btn-ghost" id="fullscreen-btn" title="Toggle fullscreen (Esc to exit)">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3H5a2 2 0 0 0-2 2v3m16-5h3a2 2 0 0 1 2 2v3M3 16v3a2 2 0 0 0 2 2h3m16 0h3a2 2 0 0 0 2-2v-3M9 3v6m0 6v6m6-12h6m-6 6h6" /></svg>
+              </button>
+            </div>
           </div>
 
           <div class="compare" id="compare">

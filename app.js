@@ -17,11 +17,13 @@
     hint: $("#hint"),
     results: $("#results"),
     compare: $("#compare"),
+    compareCard: $("#compare-card"),
     handle: $("#compare-handle"),
     compareA: $("#compare-a"),
     compareB: $("#compare-b"),
     labelA: $("#label-a"),
     labelB: $("#label-b"),
+    fullscreenBtn: $("#fullscreen-btn"),
     sizeNote: $("#size-note"),
     statsBody: $("#stats-body"),
   };
@@ -329,6 +331,24 @@
   });
 
   els.clear.addEventListener("click", () => SLOTS.forEach(clearImage));
+
+  // ---------- Fullscreen mode ----------
+
+  els.fullscreenBtn.addEventListener("click", async () => {
+    try {
+      if (document.fullscreenElement) {
+        await document.exitFullscreen();
+      } else {
+        await els.compareCard.requestFullscreen();
+      }
+    } catch (err) {
+      console.error("Fullscreen request failed:", err);
+    }
+  });
+
+  document.addEventListener("fullscreenchange", () => {
+    els.fullscreenBtn.classList.toggle("is-active", Boolean(document.fullscreenElement));
+  });
 
   // ---------- Comparison slider ----------
 
